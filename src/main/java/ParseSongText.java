@@ -2,12 +2,16 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ParseSongText {
-public List<ParseObjects> returnStopWords() throws IOException {
+public List<ParseObjects> returnStopWords(String word) throws IOException {
+
     SongList songList = new SongList();
     List<ParseObjects> parseObjects = new ArrayList<>();
     songList.returnList().forEach(sg -> {
@@ -30,7 +34,13 @@ public List<ParseObjects> returnStopWords() throws IOException {
         songText = doc.getElementsByAttributeValue("class", "Lyrics__Container-sc-1ynbvzw-2 jgQsqn");
     }
 
-int index = songText.text().indexOf("and ");
+
+
+
+        int index = songText.text().indexOf(word);
+
+
+
 if (index == - 1) {
     sg.setStopWord("No");
 }
