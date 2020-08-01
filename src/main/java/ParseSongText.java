@@ -29,9 +29,14 @@ public List<ParseObjects> returnStopWords() throws IOException {
         }
         songText = doc.getElementsByAttributeValue("class", "Lyrics__Container-sc-1ynbvzw-2 jgQsqn");
     }
-    sg.setStopWord(songText.text());
 
-
+int index = songText.text().indexOf("and ");
+if (index == - 1) {
+    sg.setStopWord("No");
+}
+else {
+    sg.setStopWord("Yes");
+}
 
         parseObjects.add(sg);
 
