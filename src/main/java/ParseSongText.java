@@ -55,6 +55,7 @@ else {
 
     parseObjects.forEach(po -> {
         System.out.println(po.getTitle());
+        System.out.println(po.getAuthor());
         System.out.println(po.getLink());
         System.out.println(po.getStopWord());
     });

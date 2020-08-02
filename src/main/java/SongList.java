@@ -18,7 +18,8 @@ public class SongList {
             href.forEach(hr -> {
                 ParseObjects parseObjects = new ParseObjects();
                 parseObjects.setLink(hr.attr("href"));
-                parseObjects.setTitle(hr.getElementsByAttributeValue("class","ChartSongdesktop__Title-sc-18658hh-3 fODYHn").text()+" - "+hr.getElementsByAttributeValue("class","ChartSongdesktop__Artist-sc-18658hh-5 kiggdb").text());
+                parseObjects.setTitle(hr.getElementsByAttributeValue("class","ChartSongdesktop__Title-sc-18658hh-3 fODYHn").text());
+                parseObjects.setAuthor(hr.getElementsByAttributeValue("class","ChartSongdesktop__Artist-sc-18658hh-5 kiggdb").text());
                 parseObjectsList.add(parseObjects);
             });
 

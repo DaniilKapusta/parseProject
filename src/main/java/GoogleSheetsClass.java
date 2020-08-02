@@ -75,7 +75,7 @@ public class GoogleSheetsClass {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1hlkfeQNRcbEcCU2oM6NkAeGw_oDVGJ4Veb_6hhjTAqU";
 
-        int i = 1;
+        int i = 2;
         ParseSongText parseSongText = new ParseSongText();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write");
@@ -85,7 +85,7 @@ public class GoogleSheetsClass {
             ValueRange body = new ValueRange()
                     .setValues(Arrays.asList(
 
-                            Arrays.asList(st.getTitle(), st.getLink(), st.getStopWord())));
+                            Arrays.asList(st.getTitle(),st.getAuthor(), st.getLink(), st.getStopWord())));
             try {
                 UpdateValuesResponse result = getSheetsService().spreadsheets().values()
                         .update(spreadsheetId, "A"+Integer.toString(i), body)

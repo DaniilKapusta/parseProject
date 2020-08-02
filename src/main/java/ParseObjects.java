@@ -1,6 +1,17 @@
 public class ParseObjects {
     private String link;
     private String title;
+    private String stopWord;
+    private String author;
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+
 
     public String getStopWord() {
         return stopWord;
@@ -10,12 +21,13 @@ public class ParseObjects {
         this.stopWord = stopWord;
     }
 
-    private String stopWord;
+
 
     public void parseObjects() {
         this.link = link;
         this.title = title;
         this.stopWord = stopWord;
+        this.author = author;
     }
     public String getLink() {
         return link;
