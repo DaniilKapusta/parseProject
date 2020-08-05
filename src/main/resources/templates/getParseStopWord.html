@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form name="form" method="POST" action="getParseStopWord">
+    <label for="stop">Введите стоп слово</label>
+    <textarea  name="stopWord" id="stop">huy </textarea>
+    <input type="text" id="text" name="text" value="textValue">
+    <button type="submit">Ввод</button>
+</form>
+<form name="fileForm" method="POST" action="/upload" enctype="multipart/form-data">
+    <label for="textFile">Введите стоп слово</label>
+    <input type="file" name="textFile" id="textFile">
+    <input type="text" name="text" id="text2" value="fileValue">
+    <button type="submit">Ввод</button>
+</form>
+</body>
+</html>

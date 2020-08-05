@@ -1,3 +1,5 @@
+package Parse.googleSheets;
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -12,6 +14,10 @@ import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
+import Parse.Application;
+import Parse.parseAlg.ParseObjects;
+import Parse.parseAlg.ParseSongText;
+import org.apache.tomcat.util.buf.StringUtils;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
@@ -41,7 +47,7 @@ public class GoogleSheetsClass {
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
-        InputStream in = Parse.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = Application.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         if (in == null) {
             throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
         }
@@ -71,21 +77,22 @@ public class GoogleSheetsClass {
                 .build();
     }
 
-    public String writeInSheets() throws IOException, GeneralSecurityException {
+    public String writeInSheets(List<String> word) throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1hlkfeQNRcbEcCU2oM6NkAeGw_oDVGJ4Veb_6hhjTAqU";
 
         int i = 2;
         ParseSongText parseSongText = new ParseSongText();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Write");
-       String word = scanner.nextLine();
+       // Scanner scanner = new Scanner(System.in);
+        //System.out.println("Write");
+      // String word = scanner.nextLine();
+       // String word = "AAA";
         for (ParseObjects st : parseSongText.returnStopWords(word)) {
 
             ValueRange body = new ValueRange()
                     .setValues(Arrays.asList(
 
-                            Arrays.asList(st.getTitle(),st.getAuthor(), st.getLink(), st.getStopWord())));
+                            Arrays.asList(st.getTitle(),st.getAuthor(), st.getLink(), StringUtils.join(st.getStopWord(), '\n'))));
             try {
                 UpdateValuesResponse result = getSheetsService().spreadsheets().values()
                         .update(spreadsheetId, "A"+Integer.toString(i), body)

@@ -1,7 +1,11 @@
+package Parse.parseAlg;
+
+import java.util.List;
+
 public class ParseObjects {
     private String link;
     private String title;
-    private String stopWord;
+    private List<String> stopWord;
     private String author;
     public String getAuthor() {
         return author;
@@ -13,11 +17,11 @@ public class ParseObjects {
 
 
 
-    public String getStopWord() {
+    public List<String> getStopWord() {
         return stopWord;
     }
 
-    public void setStopWord(String stopWord) {
+    public void setStopWord(List<String> stopWord) {
         this.stopWord = stopWord;
     }
 
