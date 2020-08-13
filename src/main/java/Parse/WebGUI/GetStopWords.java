@@ -45,7 +45,7 @@ GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
                     ss.add(s.trim());
                 }
             }
-            googleSheetsClass.writeInSheets(parseSongText.returnStopWords(ss));
+          //  googleSheetsClass.writeInSheets(parseSongText.returnStopWords(ss));
         }
         if (text.equals("fileValue")) {
 /*
