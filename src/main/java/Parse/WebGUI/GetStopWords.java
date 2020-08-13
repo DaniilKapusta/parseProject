@@ -1,6 +1,7 @@
 package Parse.WebGUI;
 
 import Parse.googleSheets.GoogleSheetsClass;
+import Parse.parseAlg.ParseSongText;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,7 +28,7 @@ public class GetStopWords {
         return new ModelAndView("getParseStopWord", "getParseStopWord", null);
     }
 
-
+ParseSongText parseSongText = new ParseSongText();
 GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
     //@RequestMapping(value = "/getParseStopWord", method = RequestMethod.POST)
 
@@ -44,7 +45,7 @@ GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
                     ss.add(s.trim());
                 }
             }
-            googleSheetsClass.writeInSheets(ss);
+            googleSheetsClass.writeInSheets(parseSongText.returnStopWords(ss));
         }
         if (text.equals("fileValue")) {
 /*

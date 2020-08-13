@@ -1,6 +1,7 @@
 package Parse.WebGUI;
 
 import Parse.googleSheets.GoogleSheetsClass;
+import Parse.parseAlg.ParseSongText;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Controller
 public class UploadController {
+    ParseSongText parseSongText = new ParseSongText();
 GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
     //Save the uploaded file to this folder
     private static String UPLOADED__FOLDER = "./src/main/resources/data/";
@@ -84,7 +86,7 @@ String[] stW = null;
         }
 
 
-googleSheetsClass.writeInSheets(stopWords);
+googleSheetsClass.writeInSheets(parseSongText.returnStopWords(stopWords));
         return "redirect:/index";
     }
 

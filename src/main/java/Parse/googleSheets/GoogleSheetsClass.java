@@ -77,7 +77,7 @@ public class GoogleSheetsClass {
                 .build();
     }
 
-    public String writeInSheets(List<String> word) throws IOException, GeneralSecurityException {
+    public String writeInSheets(List<ParseObjects> parseObjects) throws IOException, GeneralSecurityException {
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
         final String spreadsheetId = "1hlkfeQNRcbEcCU2oM6NkAeGw_oDVGJ4Veb_6hhjTAqU";
 
@@ -87,7 +87,7 @@ public class GoogleSheetsClass {
         //System.out.println("Write");
       // String word = scanner.nextLine();
        // String word = "AAA";
-        for (ParseObjects st : parseSongText.returnStopWords(word)) {
+        for (ParseObjects st : parseObjects) {
 
             ValueRange body = new ValueRange()
                     .setValues(Arrays.asList(
