@@ -1,6 +1,7 @@
 package Parse.WebGUI;
 
 import Parse.googleSheets.GoogleSheetsClass;
+import Parse.parseAlg.ParseObjects;
 import Parse.parseAlg.ParseSongText;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -85,9 +86,11 @@ String[] stW = null;
             }
         }
 
-
-googleSheetsClass.writeInSheets(parseSongText.returnStopWords(stopWords));
-        return "redirect:/index";
+List<ParseObjects> parseObjects = new ArrayList<>();
+        parseObjects = parseSongText.returnStopWords(stopWords);
+googleSheetsClass.writeInSheets(parseObjects);
+       redirectAttributes.addFlashAttribute("data",parseObjects);
+        return "redirect:/ass";
     }
 
 

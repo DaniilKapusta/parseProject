@@ -1,42 +1,40 @@
 package Parse.WebGUI;
 
 import Parse.googleSheets.GoogleSheetsClass;
+import Parse.parseAlg.ParseObjects;
 import Parse.parseAlg.ParseSongText;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class GetStopWords {
-    @RequestMapping(value = "/getParseStopWord", method = RequestMethod.GET)
-    public ModelAndView modelAndView() {
-        return new ModelAndView("getParseStopWord", "getParseStopWord", null);
+
+   @RequestMapping(value = "/eeee", method = RequestMethod.GET)
+    public ModelAndView modelAndView(ModelMap model) {
+         return new ModelAndView("getParseStopWord.html","model",model);
     }
+
 
 ParseSongText parseSongText = new ParseSongText();
 GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
-    //@RequestMapping(value = "/getParseStopWord", method = RequestMethod.POST)
 
 
     @PostMapping("/getParseStopWord")
     public String submit(String stopWord, String text, String textFile, ModelMap model, HttpServletRequest req
-                         ) throws IOException, GeneralSecurityException {
+                   ,  RedirectAttributes redirectAttributes    ) throws IOException, GeneralSecurityException {
         List<String> ss = new ArrayList<>();
+        List<ParseObjects> parseObjects = new ArrayList<>();
        if (text.equals("textValue")) {
             String[] stW = stopWord.split(";");
             for (String s : stW) {
@@ -45,7 +43,8 @@ GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
                     ss.add(s.trim());
                 }
             }
-          //  googleSheetsClass.writeInSheets(parseSongText.returnStopWords(ss));
+           parseObjects = parseSongText.returnStopWords(ss);
+           googleSheetsClass.writeInSheets(parseObjects);
         }
         if (text.equals("fileValue")) {
 /*
@@ -58,12 +57,14 @@ GoogleSheetsClass googleSheetsClass = new GoogleSheetsClass();
                 line = reader.readLine();
             }
             */
+
             System.out.println(textFile);
 
         }
-model.addAttribute("model","model");
+model.addAttribute("str",parseObjects);
+redirectAttributes.addFlashAttribute("data",parseObjects);
 
-return "index";
+return "redirect:/ass";
     }
 
 
