@@ -34,3 +34,11 @@ table.appendChild(tr);
 
 
 }
+function unvisibleTable(table) {
+if (table.hidden == false) {
+table.hidden = true;
+}
+else {
+table.hidden = false;
+}
+}
